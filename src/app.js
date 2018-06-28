@@ -7,38 +7,38 @@ var app={
     options:['One','Two']
 }
 
-var template= (
-<div>
-    <p>{app.options.length > 0 ? app.title.toUpperCase():'No options given'}</p>
-    {app.subtitle && <p>({app.subtitle})</p>}
-</div>
-);
-
-var user={
-    name:'Green',
-
+let count=0;
+const addOne=()=>{
+    count++;
+    renderCounterApp();
 }
-var userName='Green';
-var userAge=21;
-var test=24;
-// var location='Michigan';
-function getName(name){
-    if(name){
-        return <p> User name is {user.name}</p>
-    }else{
-        return undefined
-    }
+const minusOne=()=>{
+    count--;
+    renderCounterApp()
 }
-var template2=(
-    <div>
-        {getName(user.name)}
-        <p>{user.age ? user.age:'No age was given'}</p>
-        {(test && test>=18) && test}
-    </div>
-)
+
+const reset=()=>{
+    count=0;
+    renderCounterApp()
+}
 
 
 var appRoot= document.getElementById('app')
 
- ReactDOM.render(template,appRoot);
+ 
 // ReactDOM.render(template2,appRoot)
+
+const renderCounterApp=()=>{
+    var template= (
+        <div>
+           <h1>Count:{count}</h1>
+           <button onClick={addOne}>+1</button>
+           <button onClick={minusOne}>-1</button>
+           <button onClick={reset}>reset</button>
+        </div>
+        );
+        ReactDOM.render(template,appRoot);
+
+
+}
+renderCounterApp();

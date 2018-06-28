@@ -9,56 +9,51 @@ var app = {
     options: ['One', 'Two']
 };
 
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? app.title.toUpperCase() : 'No options given'
-    ),
-    app.subtitle && React.createElement(
-        'p',
-        null,
-        '(',
-        app.subtitle,
-        ')'
-    )
-);
-
-var user = {
-    name: 'Green'
-
+var count = 0;
+var addOne = function addOne() {
+    count++;
+    renderCounterApp();
 };
-var userName = 'Green';
-var userAge = 21;
-var test = 24;
-// var location='Michigan';
-function getName(name) {
-    if (name) {
-        return React.createElement(
-            'p',
-            null,
-            ' User name is ',
-            user.name
-        );
-    } else {
-        return undefined;
-    }
-}
-var template2 = React.createElement(
-    'div',
-    null,
-    getName(user.name),
-    React.createElement(
-        'p',
-        null,
-        user.age ? user.age : 'No age was given'
-    ),
-    test && test >= 18 && test
-);
+var minusOne = function minusOne() {
+    count--;
+    renderCounterApp();
+};
+
+var reset = function reset() {
+    count = 0;
+    renderCounterApp();
+};
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
 // ReactDOM.render(template2,appRoot)
+
+var renderCounterApp = function renderCounterApp() {
+    var template = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Count:',
+            count
+        ),
+        React.createElement(
+            'button',
+            { onClick: addOne },
+            '+1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: minusOne },
+            '-1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: reset },
+            'reset'
+        )
+    );
+    ReactDOM.render(template, appRoot);
+};
+renderCounterApp();
