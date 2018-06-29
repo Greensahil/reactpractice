@@ -25,6 +25,12 @@ var removeAll = function removeAll() {
     renderFormFunction();
 };
 
+var onMakeDecision = function onMakeDecision() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randomNum];
+    alert(option);
+};
+
 //Create a render function that creates a new JSX.
 
 var renderFormFunction = function renderFormFunction() {
@@ -84,8 +90,13 @@ var renderFormFunction = function renderFormFunction() {
         ),
         React.createElement(
             'button',
-            { onClick: removeAll },
+            { disabled: app.options.length === 0, onClick: removeAll },
             'Remove all'
+        ),
+        React.createElement(
+            'button',
+            { onClick: onMakeDecision },
+            'Random list'
         )
     );
     ReactDOM.render(template, appRoot);

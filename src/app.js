@@ -24,6 +24,11 @@ const removeAll=()=>{
     renderFormFunction();
 }
 
+const onMakeDecision=()=>{
+    const randomNum=Math.floor(Math.random()*app.options.length);
+    const option=app.options[randomNum];
+    alert(option)
+}
 
 //Create a render function that creates a new JSX.
 
@@ -47,8 +52,8 @@ const renderFormFunction=()=>{
                 <input type="text" name="option"/>
                 <button>Add option</button>
             </form>
-            <button onClick={removeAll}>Remove all</button>
-           
+            <button disabled={app.options.length===0} onClick={removeAll}>Remove all</button>
+            <button onClick={onMakeDecision}>Random list</button>
         </div>
 )
 ReactDOM.render(template,appRoot)
