@@ -1,46 +1,82 @@
-class Counter extends React.Component{
+
+
+class Visibility extends React.Component{
+
     constructor(props){
         super(props)
-        this.handleAddOne=this.handleAddOne.bind(this)
-        this.handleMinusOne=this.handleMinusOne.bind(this)
-        this.handleReset=this.handleReset.bind(this)
+        this.showInfo=this.showInfo.bind(this)
         this.state={
-            count:0
+            visibility:false
         }
     }
+    showInfo(){
+        this.setState(prevState=>{
+            return(
+                {
+                    visibility:!prevState.visibility
+                }
+            )
 
-    handleAddOne(){
-        this.setState((prevState)=>{
-            return{
-                count:prevState.count+1
-            }
+
         })
+       
     }
-    handleMinusOne(){
-        this.setState((prevState)=>{
-            return{
-                count:prevState.count-1
-            }
-        })
-    }
-    handleReset(){
-        this.setState(()=>{
-            return{
-                count:0
-            }
-        })
-    }
+
 
     render(){
         return(
-        <div>
-            <h1>Count:{this.state.count}</h1>
-            <button onClick={this.handleAddOne}>+1</button>
-            <button onClick={this.handleMinusOne}>-1</button>
-            <button onClick={this.handleReset}>Reset</button>
-        </div>
+            <div>
+             <h1>Visibility toggle</h1>
+             <button onClick={this.showInfo}>{this.state.visibility? 'hide info':'show info'}</button>
+             {
+                 this.state.visibility && (
+                     <div>
+                        <p>Some secret</p>
+                     </div>
+                 )
+             }
+            </div>
         )
     }
+
+
 }
 
-ReactDOM.render(<Counter/>,document.getElementById('app'))
+
+
+
+
+
+
+
+
+
+
+// let visibility=false
+// const showInfo=()=>{
+//         visibility=!visibility
+//         render();
+//     }
+// const render=()=>{
+//     var template=(
+//         <div>
+//             <h1>Visibility Toggle</h1>
+//             <button onClick={showInfo}>{visibility ? 'Hide details':'Show details'}</button>
+//             {visibility && (
+//                 <div>
+//                     <p>You can see the details!</p>
+//                 </div>
+//             )}
+//         </div>
+
+       
+       
+//     )
+//     var appRoot=document.getElementById('app')
+//     ReactDOM.render(template,appRoot)
+// }
+
+// render();
+
+
+ReactDOM.render(<Visibility/>,document.getElementById('app'))
